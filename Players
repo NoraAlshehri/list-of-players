@@ -1,0 +1,75 @@
+package com.example.happybirthday
+
+import android.R.attr.text
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.Modifier.Companion
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+@Composable
+fun UpdateUIExampble(modifier: Modifier = Modifier) {
+
+    val players = remember { mutableSetOf("Ahmed", "Khalid", "Hassan", "Renad") }
+    var selectedIndex by remember { mutableIntStateOf(0) }
+
+
+    Column(modifier = modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
+        Text(
+            text = "The palyer is: ${players.elementAt(selectedIndex)}",
+            fontSize = 35.sp,
+            lineHeight = 70.sp,
+            textAlign = TextAlign.Center,
+            color = Color.Blue
+        )
+
+        Button(
+            onClick = {
+                if (selectedIndex == players.indices.last) {
+                    selectedIndex = players.indices.first
+                } else {
+                    selectedIndex += 1
+                }
+
+            },
+            content = {
+                Text(
+                    text = "Next palyer",
+                    fontSize = 23.sp,
+                    lineHeight = 20.sp,
+                    color = Color.Yellow
+
+                )
+
+            }
+        )
+
+    }
+}
+
+@Preview(
+    showBackground = true,
+    showSystemUi = true
+)
+@Composable
+fun PreviewUpdateUIExampble() {
+    UpdateUIExampble(
+        Modifier.fillMaxSize()
+    )
+
+}
